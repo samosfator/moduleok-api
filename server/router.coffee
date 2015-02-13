@@ -24,13 +24,15 @@ Router.map ->
             userId: @params.query.userId
             group: @params.query.group
             totalScore: @params.query.totalScore
+            scoresCount: @params.query.scoresCount
 
-          if Ratings.find(userId: ratingDocument.userId).length() < 0
+          if Ratings.find(userId: ratingDocument.userId).fetch().length < 1
             Ratings.insert ratingDocument
-          else
+          else if ratingDocument.totalScore != 0
             Ratings.update userId: ratingDocument.userId,
               $set:
                 totalScore: ratingDocument.totalScore
+                scoresCount: ratingDocument.scoresCount
 
       @response.statusCode = 200
       @response.end "Happy Easter!"
