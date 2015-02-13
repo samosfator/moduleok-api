@@ -3,12 +3,14 @@ Router.map ->
     path: '/api/:method'
     where: 'server'
     action: ->
+      @response.statusCode = 200
+      @response.setHeader 'Access-Control-Allow-Origin', '*'
+      @response.setHeader 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'
+
       switch @params.method
         when "getCurrentSemester"
-          json =
-            result: if moment().month() > 7 then 0 else 1
+          json = result: if moment().month() > 7 then 0 else 1
 
-          @response.statusCode = 200
           @response.setHeader 'Content-Type', 'application/json'
           @response.end JSON.stringify json
       return
@@ -20,6 +22,8 @@ Router.map ->
   where: 'server'
   action: ->
     @response.statusCode = 200
+    @response.setHeader 'Access-Control-Allow-Origin', '*'
+    @response.setHeader 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'
 
     switch @params.method
       when "postTotalScore"
