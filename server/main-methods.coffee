@@ -21,7 +21,7 @@ Meteor.methods
 
         post[key] = value?.trim() for own key, value of post
 
-        if query.fullText is true
+        if query.fullText is "true"
           $_postPage = cheerio.load HTTP.get(post.readMoreLink).content
 
           postHasAttachments = $_postPage('.attachment a').length > 0
