@@ -11,3 +11,8 @@ iron:router
 coffeescript
 underscore
 momentjs:moment
+http
+meteorhacks:npm
+
+
+npm-container

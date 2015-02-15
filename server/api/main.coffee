@@ -3,11 +3,12 @@ Router.map ->
     path: '/'
     where: 'server'
     action: ->
-      result = result:
-        description: "JSON API for TNEU Apps"
-        repo: "https://github.com/samosfator/moduleok-api"
+      result =
+        result:
+          description: "JSON API for TNEU Apps"
+          repo: "https://github.com/samosfator/moduleok-api"
       returnJson.call this, result
-     
+
 Router.map ->
   @route '/api/:method',
     path: '/api/:method'
@@ -15,10 +16,17 @@ Router.map ->
     action: ->
       switch @params.method
         when "getCurrentSemester"
-          result = result: if moment().month() > 7 then 0 else 1
+          result =
+            result: if moment().month() > 7 then 0 else 1
           returnJson.call this, result
 
         when "getNews"
           query =
-            limit: @params.query.limit
-            limit: @params.query.limit
+            page: @params.query.page or 1
+            count: @params.query.count or 15
+            fullText: @params.query.fullText or false
+
+          ((that) ->
+            Meteor.call "getNews", query, (err, result) ->
+              returnJson.call that, result: err or result
+          )(this)
