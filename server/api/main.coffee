@@ -28,5 +28,4 @@ Router.map ->
 
           ((that) ->
             Meteor.call "getNews", query, (err, result) ->
-              returnJson.call that, result: err or result
-          )(this)
+              returnJson.call that, result: err or result)(this)
