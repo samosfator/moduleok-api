@@ -29,19 +29,3 @@ GET: `http://moduleok-api.meteor.com/api/getNews?page=3&count=1&fullText=true`
     }]
 }
 ```
-
-#### /api/getCurrentSemester
-
-Returns current study semester. 
-
-| Parameters | Result              |
-| -----------|---------------------|
-| None       | Integer: `0` or `1` |
-
-GET: `http://moduleok-api.meteor.com/api/getCurrentSemester`
-
-```json
-{
-    "result": 1
-}
-```
