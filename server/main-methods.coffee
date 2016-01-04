@@ -11,13 +11,13 @@ Meteor.methods
                   #{moment().format("MM")}-
                   #{moment().year()}".replace /\s/g, ""
 
-      news = $(".short-1").slice(0, query.count).map(->
+      news = $("#dle-content .well").slice(0, query.count).map(->
         post =
-          title: $(this).find(".short-1-title a").text().replace /«|»/g, ""
-          date: $(this).find(".short-2-date").text().replace("Вчера", yesterdayDate)
-          description: $(this).find(".short-1-text p").text()
-          image: $(this).find(".short-1-text p a").attr("href")
-          readMoreLink: $(this).find(".short-1-text .short-1-more a").attr("href")
+          title: $(this).find("h4").text().replace /«|»/g, ""
+          date: $(this).find(".highlight").text().replace("Вчера", yesterdayDate).replace("Дата: ", "")
+          description: $(this).find(".timg").text()
+          image: $(this).find(".highslide").attr("href")
+          readMoreLink: $(this).find("div[style=\"text-align: right;\"] a").attr("href")
 
         post[key] = value?.trim() for own key, value of post
 
@@ -28,7 +28,7 @@ Meteor.methods
           postHasPhotos = $_postPage(".photonews a").length > 0
 
           post.fullText =
-            $_postPage(".shot-text div").eq(0).find("p").map(->
+            $_postPage("#article .timg").eq(0).map(->
               $_postPage(this).text()?.trim()
             ).filter(-> this.length > 0).get().join "\\n"
 
