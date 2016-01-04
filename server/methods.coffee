@@ -1,19 +1,21 @@
 Meteor.methods
   getNews: (query) ->
+    formattedDates =
+      today: "#{moment().format("DD")}-
+                  #{moment().format("MM")}-
+                  #{moment().year()}".replace /\s/g, ""
+      yesterday: "#{moment().subtract(1, "days").format("DD")}-
+                  #{moment().format("MM")}-
+                  #{moment().year()}".replace /\s/g, ""
     try
       newsUrl = "http://www.tneu.edu.ua/news/page/#{query.page}/"
 
       $ = cheerio.load HTTP.get(newsUrl).content
 
-      #example: 13-02-2015
-      yesterdayDate = "#{moment().subtract(1, "days").format("DD")}-
-                  #{moment().format("MM")}-
-                  #{moment().year()}".replace /\s/g, ""
-
-      news = $("#dle-content .well").slice(0, query.count).map(->
+      news = $("#dle-content .well").slice(0, query.count).map( ->
         post =
-          title: $(this).find("h4").text().replace /«|»/g, ""
-          date: $(this).find(".highlight").text().replace("Вчера", yesterdayDate).replace("Дата: ", "")
+          title: $(this).find("h4").text().replace(/«|»/g, "")
+          date: $(this).find(".highlight").text().replace("Сьогодні", formattedDates.today).replace("Вчора", formattedDates.yesterday).replace("Дата: ", "")
           description: $(this).find(".timg").text()
           image: $(this).find(".highslide").attr("href")
           readMoreLink: $(this).find("div[style=\"text-align: right;\"] a").attr("href")

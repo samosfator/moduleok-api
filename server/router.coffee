@@ -4,8 +4,8 @@ Router.map ->
     where: 'server'
     action: ->
       returnJson.call @, {
-        description: "JSON API for TNEU Apps"
-        repo: "https://github.com/vladgolubev/moduleok-api"
+        description: 'JSON API for TNEU Apps'
+        repo: 'https://github.com/vladgolubev/moduleok-api'
       }
 
   @route '/api/:method',
@@ -13,13 +13,13 @@ Router.map ->
     where: 'server'
     action: ->
       switch @params.method
-        when "getNews"
+        when 'getNews'
           query =
             page: @params.query.page or 1
             count: @params.query.count or 15
             fullText: @params.query.fullText or false
 
-          Meteor.call "getNews", query, (err, result) =>
+          Meteor.call 'getNews', query, (err, result) =>
             returnJson.call @, {result: err or result}
 
 
