@@ -3,7 +3,6 @@ Meteor.methods
     try
       newsUrl = "http://www.tneu.edu.ua/news/page/#{query.page}/"
 
-      cheerio = Meteor.npmRequire("cheerio")
       $ = cheerio.load HTTP.get(newsUrl).content
 
       #example: 13-02-2015
