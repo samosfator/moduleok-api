@@ -1,4 +1,4 @@
-# READ THE API DOCS AT [moduleok.apiary.io](http://docs.moduleok.apiary.io/)
+# READ THE API DOCS AT [docs.moduleok.apiary.io](http://docs.moduleok.apiary.io/)
 
 ---
 
