@@ -1,3 +1,9 @@
+# READ THE API DOCS AT [moduleok.apiary.io](http://docs.moduleok.apiary.io/)
+
+---
+
+## Old API documentation
+
 #### /api/getNews
 
 Returns recent news from [tneu.edu.ua](http://tneu.edu.ua) with photos and file attachments.
